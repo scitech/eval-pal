@@ -12,6 +12,7 @@ def safely_run_subprocess(command, code):
         temp.flush()
         command = '{} {}'.format(command, temp.name)
         completed = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
+
     return completed
 
 

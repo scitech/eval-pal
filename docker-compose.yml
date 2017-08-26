@@ -1,0 +1,9 @@
+version: '3'
+services:
+  evalpal:
+    build: .
+    image: evalpal:dev
+    volumes:
+      - ./evalpal:/opt/evalpal
+    ports:
+      - 8999:1337

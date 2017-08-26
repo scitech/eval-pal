@@ -2,9 +2,12 @@
 
 Evaluates code in many different languages.
 
-Currently depends on binaries installed on host machine.
+Currently supported:
+- JavaScript (node 8)
+- Ruby
+- Python3
+- Elixir
 
 Future:
-  - Docker
   - Demote user executing the script
   - Authenticating requests
