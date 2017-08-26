@@ -2,10 +2,8 @@ import functools
 import subprocess
 import tempfile
 
-from sanic import Sanic
+from evalpal import app
 from sanic.response import json
-
-app = Sanic()
 
 
 def safely_run_subprocess(command, code):
@@ -15,6 +13,7 @@ def safely_run_subprocess(command, code):
         command = '{} {}'.format(command, temp.name)
         completed = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
     return completed
+
 
 @app.route("/node", methods=["POST"])
 async def evaluate_node(request):
@@ -42,7 +41,3 @@ async def evaluate_elixir(request):
     safely_run_elixir = functools.partial(safely_run_subprocess, 'iex')
     completed_process = safely_run_elixir(request.body)
     return json(completed_process.stdout)
-
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8999)
