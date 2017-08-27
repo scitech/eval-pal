@@ -7,3 +7,5 @@ services:
       - ./evalpal:/opt/evalpal
     ports:
       - 8999:1337
+    cap_add:
+      - SYS_ADMIN

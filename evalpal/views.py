@@ -6,11 +6,11 @@ from evalpal import app
 from sanic.response import json
 
 
-def safely_run_subprocess(command, code):
+def safely_run_subprocess(unsafe_command, code):
     with tempfile.NamedTemporaryFile() as temp:
         temp.write(code)
         temp.flush()
-        command = '{} {}'.format(command, temp.name)
+        command = 'firejail --noprofile --force --quiet {} {}'.format(unsafe_command, temp.name)
         completed = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
 
     return completed
